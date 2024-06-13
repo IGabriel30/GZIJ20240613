@@ -56,9 +56,12 @@ class OperacionesMatematicasTest {
     @Test
     void testCalcularRaizCuadradaNegativo() {
         double numero = -4.0;
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        try {
             operacionesMatematicas.calcularRaizCuadrada(numero);
-        });
-        assertEquals("El número no puede ser negativo", exception.getMessage(), "M Error ");
+            fail("Se esperaba una IllegalArgumentException para números negativos");
+        } catch (IllegalArgumentException e) {
+            assertEquals("El número no puede ser negativo", e.getMessage(), "Mensaje de excepción incorrecto");
+            System.out.println("Excepción capturada: " + e.getMessage());
+        }
     }
 }
